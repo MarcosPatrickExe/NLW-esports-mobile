@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, FlatList } from 'react-native';
 import { styles } from './style';
 import logoImg from '../../assets/logo-nlw-esports.png';
 import { Heading } from '../../components/Heading'; 
 import { GameCard } from '../../components/GameCard';
 import { GAMES } from '../../utils/games';
+
+
 
 export function Home() {
   return (
@@ -20,9 +22,19 @@ export function Home() {
             subtitle="Selecione o game que deseja jogar..."
         />
 
-        <GameCard 
-            data= {GAMES[0]}
-        />
+        <FlatList
+              data= { GAMES }
+              
+              renderItem={ ({item})=>(
+                   <GameCard data= { item } />
+              )}
+
+              keyExtractor={ item => item.id }
+
+              showsHorizontalScrollIndicator={false}
+              horizontal = {true}
+              contentContainerStyle={ styles.contentList}
+         />
 
     </View>
   );

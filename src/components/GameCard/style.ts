@@ -4,7 +4,9 @@ import { THEME } from '../../theme';
 //rnso
 export const styles = StyleSheet.create({
      container: {
-        marginRight: 24,
+        marginTop: 10,
+        marginRight: 5,
+        transform: [{scale: 0.9}]
      },
      cover: {
         width: 240,

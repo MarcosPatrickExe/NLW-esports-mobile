@@ -4,11 +4,13 @@ import { THEME } from '../../theme';
 export const styles = StyleSheet.create({
     container: {
         width: '100%',
-        padding: 32
+        marginTop: '-6%', // era 0
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     title: {
         color: THEME.COLORS.TEXT,
-        fontSize: THEME.FONT_SIZE.LG,
+        fontSize: THEME.FONT_SIZE.MD,
         fontFamily: THEME.FONT_FAMILY.BLACK
     },
     subtitle:{

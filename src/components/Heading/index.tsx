@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, ViewProps } from 'react-native';
 import { styles } from './style';
 
+
 interface Props extends ViewProps {
     title: string,
     subtitle: string
 }
-
 
 
 export function Heading( {title, subtitle, ...rest}:Props ) {

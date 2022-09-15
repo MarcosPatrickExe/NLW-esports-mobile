@@ -8,7 +8,11 @@ export const styles = StyleSheet.create({
     logo: {
         width: 214,
         height: 120,
-        marginTop: 74,
+        marginTop: '12%', // era 74
         marginBottom: 48
+    },
+    contentList: {
+        paddingLeft: 32,
+        paddingRight: 64
     }
 });

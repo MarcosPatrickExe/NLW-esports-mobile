@@ -1,6 +1,8 @@
 import React from 'react';
 import { styles } from './style';
-import { TouchableOpacity, TouchableOpacityProps, ImageBackground, ImageSourcePropType } from 'react-native';
+import { TouchableOpacity, TouchableOpacityProps, ImageBackground, ImageSourcePropType, Text } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { THEME } from '../../theme';
 
 // INTERFACE PUBLICA PARA O COMPONENTE PAI 'HOME'
 export interface GameCardProps {
@@ -20,10 +22,22 @@ interface Props extends TouchableOpacityProps {
 export function GameCard( {data, ...othersProperties}: Props ) {
     return (
         <TouchableOpacity style={styles.container}   {...othersProperties}>
+              
                 <ImageBackground
                     style={ styles.cover}
-                    source={ data.cover }
-                />
+                    source={ data.cover }>
+
+                            <LinearGradient colors={ THEME.COLORS.FOOTER} style= { styles.footer }>
+                                    <Text style={ styles.name }>
+                                        {data.name}
+                                    </Text>
+
+                                    <Text style={ styles.ads }>
+                                        {data.ads}
+                                    </Text>
+                            </LinearGradient>
+
+                </ImageBackground>
 
         </TouchableOpacity>
     );
