@@ -1,15 +1,18 @@
 //import { StatusBar } from 'expo-status-bar';
 //import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
+import React from 'react';
 import{ StatusBar} from 'react-native';
-import { Background } from './src/components/Background/index'; 
-
+import { Background } from './src/components/Background'; 
+import { Loading } from './src/components/Loading';
+import { Home } from './src/screens/Home';
+ 
 import {
    useFonts,
    Inter_400Regular,
    Inter_600SemiBold,
    Inter_700Bold,
-   Inter_900Black,
+   Inter_900Black
 } from '@expo-google-fonts/inter';
 
 
@@ -21,7 +24,7 @@ import {
 
 export default function App() {
 
-  // obtendo variavel q ira dizer se as fontes foram carregadas ou nao
+  // obtendo variavel q irá dizer se as fontes foram carregadas ou nao
   const [fontsLoaded] = useFonts({
       Inter_400Regular,
       Inter_600SemiBold,
@@ -34,11 +37,11 @@ export default function App() {
           <StatusBar 
               barStyle="light-content"
               backgroundColor="transparent"
-              translucent
-              >
-          </StatusBar>
+              translucent={true}
+          />
 
-          { fontsLoaded ? Status }
+          { fontsLoaded ? <Home/> : <Loading />  }
+            
       </Background>
   );
 }
