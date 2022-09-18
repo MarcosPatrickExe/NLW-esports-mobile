@@ -7,10 +7,14 @@ import { THEME } from '../../theme';
 // INTERFACE PUBLICA PARA O COMPONENTE PAI 'HOME'
 export interface GameCardProps {
     id: string,
-    name: string,
-    ads: string,
-    cover: ImageSourcePropType
+    title: string,
+    _count: {
+        ads: string
+    },
+    bannerUrl: string  // PODERIA SER DO TIPO 'ImageSourcePropType'
 }
+
+
 
 // ESSA INTERFACE CONTEM UMA PROPRIEDADE PERSONALIZAVEL E AS DEMAIS ADVEM DA INTERFACE 'TouchableOpacityProps'
 interface Props extends TouchableOpacityProps {
@@ -25,15 +29,16 @@ export function GameCard( {data, ...othersProperties}: Props ) {
               
                 <ImageBackground
                     style={ styles.cover}
-                    source={ data.cover }>
+                    source={ {uri: data.bannerUrl} }>
+                            {/* uri: define que a imagem será buscada no endereco passado */}
 
                             <LinearGradient colors={ THEME.COLORS.FOOTER} style= { styles.footer }>
                                     <Text style={ styles.name }>
-                                        {data.name}
+                                        {data.title}
                                     </Text>
 
                                     <Text style={ styles.ads }>
-                                        {data.ads}
+                                        {data._count.ads} Anúncio(s)
                                     </Text>
                             </LinearGradient>
 

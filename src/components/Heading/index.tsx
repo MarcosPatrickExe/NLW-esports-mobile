@@ -9,7 +9,8 @@ interface Props extends ViewProps {
 }
 
 
-export function Heading( {title, subtitle, ...rest}:Props ) {
+export function Heading( {title, subtitle, ...rest} :Props ) {
+  
   return (
     <View style={styles.container}  {...rest} >
         
