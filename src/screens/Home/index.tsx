@@ -10,6 +10,9 @@ import { Background } from '../../components/Background/index';
 import { useNavigation } from '@react-navigation/native';
 
 
+
+
+
 export function Home() {
 
   const [games, setGames] = useState <GameCardProps[]> ([]);
@@ -59,7 +62,7 @@ export function Home() {
 
            {/* A PROPRIEDADE 'onPress' VEM DA INTERFACE 'TouchableOpacityProps' */}
             <FlatList
-                  data = { games }
+                  data={ games }
                   //data= { GAMES } // 'GAMES' CONTÉM DADOS ESTÁTICOS PARA TESTES 
                   
                   renderItem={ ({item})=>(
