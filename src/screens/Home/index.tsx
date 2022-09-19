@@ -4,15 +4,25 @@ import { styles } from './style';
 import logoImg from '../../assets/logo-nlw-esports.png';
 import { Heading } from '../../components/Heading'; 
 import { GameCard, GameCardProps } from '../../components/GameCard';
-import { GAMES } from '../../utils/games';
-
+//import { GAMES } from '../../utils/games';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Background } from '../../components/Background/index';
+import { useNavigation } from '@react-navigation/native';
 
 
 export function Home() {
 
   const [games, setGames] = useState <GameCardProps[]> ([]);
-
  
+  const navigation = useNavigation();
+
+
+  function handleOpenGame( {id, title, bannerUrl}:GameCardProps ){
+        // PASSANDO PROPRIEDADES PARA O COMPONENTE DA TELA DE 'game':
+       navigation.navigate('game', {id, title, bannerUrl});
+  }
+
+  
   useEffect(()=>{
 
       fetch('http://10.0.0.104:3333/games')
@@ -32,47 +42,55 @@ export function Home() {
 
 
   return (
-    <View style={styles.container}>
+    <Background>
+        <SafeAreaView style={styles.container}>
 
-        <Image 
-           source={ logoImg }
-           style={ styles.logo }
-        />
+            <Image 
+              source={ logoImg }
+              style={ styles.logo }
+            />
 
-        <Heading 
-            title="Encontre seu duo!"
-            subtitle="Selecione o game que deseja jogar..."
-        />
+            <Heading 
+                title="Encontre seu duo!"
+                subtitle="Selecione o game que deseja jogar..."
+            />
 
-        <FlatList
-              data = { games }
-              //data= { GAMES } // 'GAMES' CONTÉM DADOS ESTÁTICOS PARA TESTES 
-              
-              renderItem={ ({item})=>(
-                   <GameCard data= { item } />
-              )}
 
-              keyExtractor={ item => item.id }
 
-              showsHorizontalScrollIndicator={false}
-              horizontal = {true}
-              contentContainerStyle={ styles.contentList}
-         />
+           {/* A PROPRIEDADE 'onPress' VEM DA INTERFACE 'TouchableOpacityProps' */}
+            <FlatList
+                  data = { games }
+                  //data= { GAMES } // 'GAMES' CONTÉM DADOS ESTÁTICOS PARA TESTES 
+                  
+                  renderItem={ ({item})=>(
+                      <GameCard 
+                          data= { item }
+                          onPress={ ()=>handleOpenGame(item) }
+                      />
+                  )}
 
-{/*
-         <View>
-            { 
-              games.map( (game)=>{
-                  return (
-                      <Text style={ { color: 'white'} }>
-                          {game.title}
-                      </Text>
-                  )
-              })  
-            }
-         </View>
-*/}
+                  keyExtractor={ item => item.id }
 
-    </View>
+                  showsHorizontalScrollIndicator={false}
+                  horizontal = {true}
+                  contentContainerStyle={ styles.contentList}
+            />
+
+            {/*
+                    <View>
+                        { 
+                          games.map( (game)=>{
+                              return (
+                                  <Text style={ { color: 'white'} }>
+                                      {game.title}
+                                  </Text>
+                              )
+                          })  
+                        }
+                    </View>
+            */}
+
+        </SafeAreaView>
+    </Background>
   );
 }

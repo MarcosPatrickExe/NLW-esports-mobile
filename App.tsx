@@ -5,8 +5,9 @@ import React from 'react';
 import{ StatusBar} from 'react-native';
 import { Background } from './src/components/Background'; 
 import { Loading } from './src/components/Loading';
-import { Home } from './src/screens/Home';
- 
+//import { Home } from './src/screens/Home';
+import { Routes} from './src/routes/index';
+
 import {
    useFonts,
    Inter_400Regular,
@@ -16,9 +17,7 @@ import {
 } from '@expo-google-fonts/inter';
 
 
-
-
-// LINK DO FIGMA:
+// LINK DO FIGMA (CONTÉM A INTERFACE DA APLICAÇÃO ):
 // https://www.figma.com/community/file/1150897317533332617
 
 
@@ -40,7 +39,7 @@ export default function App() {
               translucent={true}
           />
 
-          { fontsLoaded ? <Home/> : <Loading />  }
+          { fontsLoaded ? <Routes/> : <Loading />  }
             
       </Background>
   );
