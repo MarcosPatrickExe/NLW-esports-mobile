@@ -28,7 +28,7 @@ export function Home() {
   
   useEffect(()=>{
 
-      fetch('http://10.0.0.104:3333/games')
+      fetch('http://192.168.3.6:3333/games')
         .then( response => response.json())
         .then( (data)=>{
              console.dir( JSON.stringify(data, null, 4) );
@@ -67,6 +67,7 @@ export function Home() {
                   
                   renderItem={ ({item})=>(
                       <GameCard 
+                          key={item.id}
                           data= { item }
                           onPress={ ()=>handleOpenGame(item) }
                       />

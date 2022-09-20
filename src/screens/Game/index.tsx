@@ -7,7 +7,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 // 'useRoute' PERMITE QUE O COMPONENTE ACESSE OS VALORES DAS PROPRIEDADES PASSADAS À ELE PELO MÉTODO 'navigation.navigate()'
 
 import { GameParams } from '../../@Types/navigation';
-import { TouchableOpacity, View, Image, FlatList } from 'react-native';
+import { TouchableOpacity, View, Image, FlatList, Text } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { THEME } from '../../theme';
 import logoImg from '../../assets/logo-nlw-esports.png';
@@ -37,7 +37,7 @@ export function Game() {
   useEffect(()=>{
 
       // REQUISITANDO TODOS OS ANÚNCIOS RELACIONADOS À UM GAME:
-      fetch(`http://10.0.0.104:3333/games/${game.id}/ads`)
+      fetch(`http://192.168.3.6:3333/games/${game.id}/ads`)
           .then( response => response.json())
           .then( (data: DuoCardProps[] )=> setAds(data) )
           .catch( (error)=> console.log( error) );
@@ -87,9 +87,18 @@ export function Game() {
                 keyExtractor={ item => item.id} 
                 renderItem={ 
                     ({item})=>(
-                          <DuoCard key={item.id} data={ item } />
+                          <DuoCard key={item.id} data={ item } onConnect={ ()=>{} } />
                     )
                 }
+                horizontal={true}
+                style={ styles.containerList}
+                contentContainerStyle={ [ (ads.length > 0) ? styles.contentList : styles.emptyListContent ]  }
+                showsHorizontalScrollIndicator={false}
+                ListEmptyComponent={ ()=>(
+                    <Text style={ styles.emptyListText }>
+                        Não há anúncios publicados  para esse jogo ainda :/
+                    </Text>
+                )}
             />
 
          </SafeAreaView>
