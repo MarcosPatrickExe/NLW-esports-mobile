@@ -20,7 +20,7 @@ export function AppRoutes(){
                     name="home" 
                     component={ Home}
                    
-                />{/* Componente que será chamddo quando 'Home' for chamado */}
+                />{/* Componente que será chamado quando 'Home' for chamado */}
 
                 <Screen 
                     name="game" 

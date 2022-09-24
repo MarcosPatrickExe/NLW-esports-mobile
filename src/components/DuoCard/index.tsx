@@ -28,12 +28,12 @@ export function DuoCard( {data, onConnect} :Props ) {
   return (
     <View style={styles.container}>
 
-        <DuoInfo 
+        <DuoInfo
             label="Nome"
             value={data.nickName}
         />
 
-        <DuoInfo 
+        <DuoInfo
             label="Tempo de jogo"
             value={`${data.yearsPlaying} anos`}
         />

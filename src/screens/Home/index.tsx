@@ -48,15 +48,9 @@ export function Home() {
     <Background>
         <SafeAreaView style={styles.container}>
 
-            <Image 
-              source={ logoImg }
-              style={ styles.logo }
-            />
+            <Image source={ logoImg } style={ styles.logo } />
 
-            <Heading 
-                title="Encontre seu duo!"
-                subtitle="Selecione o game que deseja jogar..."
-            />
+            <Heading title="Encontre seu duo!" subtitle="Selecione o game que deseja jogar..." />
 
 
 

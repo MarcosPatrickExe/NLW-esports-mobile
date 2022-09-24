@@ -1,12 +1,9 @@
-//import { StatusBar } from 'expo-status-bar';
-//import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
 import React from 'react';
 import{ StatusBar} from 'react-native';
 import { Background } from './src/components/Background'; 
 import { Loading } from './src/components/Loading';
-//import { Home } from './src/screens/Home';
 import { Routes} from './src/routes/index';
+
 
 import {
    useFonts,
@@ -19,6 +16,11 @@ import {
 
 // LINK DO FIGMA (CONTÉM A INTERFACE DA APLICAÇÃO ):
 // https://www.figma.com/community/file/1150897317533332617
+
+
+// DICAS DE FEATURES PARA COLOCAR NA APLICAÇÃO:
+// NOTIFICAR USUÁRIOS PARA AVISAR QUE NOVO ANUNCIO FOI PUBLICADO
+
 
 
 export default function App() {

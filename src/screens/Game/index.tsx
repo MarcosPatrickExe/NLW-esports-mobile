@@ -14,11 +14,10 @@ import logoImg from '../../assets/logo-nlw-esports.png';
 import { Heading } from '../../components/Heading/index';
 //import { GAMES } from '../../utils/games';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard/index';
+import { DuoMatch } from '../../components/DuoMatch';
 
 
 // react-native-vector-icons
-
-
 
 
 export function Game() {
@@ -26,24 +25,34 @@ export function Game() {
   const [ads, setAds] = useState<DuoCardProps[]>([]);
   const navigation = useNavigation();
   const route = useRoute(); // INSTANCIANDO OBJETO RESPONSAVEL PELO RECEBIMENTO DAS INFORMAÇÕES DO COMPONENTE 'Home'
-  const game = route.params as GameParams;// RECEBENDO OS VALORES ADVINDOS DAS PROPRIEDADES
- 
+  const game :GameParams = route.params as GameParams;// RECEBENDO OS VALORES ADVINDOS DAS PROPRIEDADES
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('');
+
 
   function handleGoBack(){
        navigation.goBack();
   }
 
 
-  useEffect(()=>{
+  async function getDiscordUser( adsId: string){
 
+      fetch(`http://192.168.3.6:3333/ads/${adsId}/discord`)
+          .then( response => response.json())
+          .then( data => setDiscordDuoSelected( data.discord ) )
+          .catch( (error)=> console.log("Erro ao buscar o discord do anúncio selecionado!! \n"+error) );
+  }
+
+
+  useEffect(()=>{
       // REQUISITANDO TODOS OS ANÚNCIOS RELACIONADOS À UM GAME:
       fetch(`http://192.168.3.6:3333/games/${game.id}/ads`)
           .then( response => response.json())
-          .then( (data: DuoCardProps[] )=> setAds(data) )
-          .catch( (error)=> console.log( error) );
+          .then( (data :DuoCardProps[] )=> setAds(data) )
+          .catch( (error)=> console.log("Erro ao buscar anúncios do jogo selecionado!! \n"+error) );
   }, []);
 
 
+  
   
   return (
     <Background>
@@ -58,12 +67,9 @@ export function Game() {
                       />
                   </TouchableOpacity>
 
-                  <Image 
-                        source={ logoImg}
-                        style={ styles.logo}
-                   />
+                  <Image source={ logoImg} style={ styles.logo} />
 
-                   <View style={styles.right} />
+                  <View style={styles.right} />
             </View>
 
 
@@ -87,7 +93,7 @@ export function Game() {
                 keyExtractor={ item => item.id} 
                 renderItem={ 
                     ({item})=>(
-                          <DuoCard key={item.id} data={ item } onConnect={ ()=>{} } />
+                          <DuoCard key={item.id} data={ item } onConnect={ ()=> getDiscordUser(item.id) } />
                     )
                 }
                 horizontal={true}
@@ -100,6 +106,15 @@ export function Game() {
                     </Text>
                 )}
             />
+
+
+            {/* MODAL QUE SERÁ ABERTO A PARTIR DO BOTÃO "CONECTAR" DE UM GAME SELECIONADO: */}
+            <DuoMatch 
+                  oncloseFunc={ ()=> setDiscordDuoSelected('') }
+                  visible={ discordDuoSelected.length > 0 } 
+                  discord={ discordDuoSelected }
+            />
+
 
          </SafeAreaView>
     </Background>
